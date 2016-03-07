@@ -1,7 +1,9 @@
 from user_model import user as user_model
+from pam_model import pam as pam_model
 class user:
 	def __init__(self):
 		self.user_model_object = user_model()
+		self.pam_model = pam_model()
 		self.attributes = self.user_model_object.attributes
 
 	def create(self,options):
@@ -20,8 +22,9 @@ class user:
 		return userdata
 
 	def update_state(self,options):
-		if '_id' not in options or 'update_type' not in options:
-			raise Exception("No id given for user",400)
-		# else:
-			# update_type
-		pass
+		if 'user_id' not in options or 'update_type' not in options:
+			raise Exception("No id/update_type given for user",400)
+		else:
+			if options['update_type'] == "PAM":
+				response = self.pam_model.insert(options)
+				return response

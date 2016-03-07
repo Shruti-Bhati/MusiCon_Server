@@ -27,6 +27,7 @@ def update_user_state():
 		raise Exception("No data sent for create user",400)
 	user_object = user()
 	response = user_object.update_state(form)
+	return str(response)
 
 @app.errorhandler(500)
 def internal_server_error(error):
