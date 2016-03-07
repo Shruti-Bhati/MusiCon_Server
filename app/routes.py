@@ -1,6 +1,6 @@
 from app import app
 from flask import request,jsonify
-from user.controller import user
+from models.user_controller import user
 
 @app.route('/v1/user/save_state',methods=['POST'])
 def user_question():
@@ -14,11 +14,20 @@ def user_question():
 def create_user():
 	form = request.form
 	if not form or len(form) == 0:
-		raise Exception("Error","No data sent for create user")
+		raise Exception("No data sent for create user",400)
 	user_object = user()
 	response = user_object.create(form)
-	return response
+	return str(response)
 	
+
+@app.route('/v1/user/update_state',methods=['POST'])
+def update_user_state():
+	form = request.form
+	if not form or len(form) == 0:
+		raise Exception("No data sent for create user",400)
+	user_object = user()
+	response = user_object.update_state(form)
+
 @app.errorhandler(500)
 def internal_server_error(error):
 	print "Internal server error ",error

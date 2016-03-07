@@ -19,3 +19,8 @@ class user:
 		insert_id = db[self.database][self.collection].insert_one(data).inserted_id
 		print 'User inserted id -',insert_id
 		return insert_id
+
+	def update(self,options):
+		_id = options['_id']
+		print "Updating user",_id
+		
