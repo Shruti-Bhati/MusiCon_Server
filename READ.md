@@ -1,1 +1,29 @@
 MusiCon for MAS 8803
+
+
+APIs
+
+1. User Create API
+
+  HTTP POST,data needs to be sent as form-data
+  endpoint - http://52.37.58.111/v1/user/create
+  compulsory fields = username,email,first_name,last_name
+  optional = phone
+
+
+
+2.  User fetch
+
+  HTTP GET,
+  Sample APIs
+  http://52.37.58.111/v1/user/get?username=sbhati3
+
+
+  
+3.  User State update(Currently only has PAM updates)
+
+  HTTP POST,data needs to be sent as form-data
+  sample fields and data =>
+  user_id:56dce1ad8541556a60112400
+  mood_id:5
+  update_type:PAM
