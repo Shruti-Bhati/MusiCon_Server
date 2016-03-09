@@ -13,7 +13,8 @@ APIs
 
 
 2.  User fetch
-
+  
+  endpoint - http://52.37.58.111/v1/user/get
   HTTP GET,
   Sample APIs
   http://52.37.58.111/v1/user/get?username=sbhati3
@@ -21,7 +22,8 @@ APIs
 
   
 3.  User State update(Currently only has PAM updates)
-
+  
+  endpoint - http://52.37.58.111/v1/user/update_state
   HTTP POST,data needs to be sent as form-data
   sample fields and data =>
   user_id:56dce1ad8541556a60112400
