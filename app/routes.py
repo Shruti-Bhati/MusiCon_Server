@@ -2,13 +2,16 @@ from app import app
 from flask import request,jsonify
 from models.user_controller import user
 
-@app.route('/v1/user/save_state',methods=['POST'])
-def user_question():
-	form = request.form
-	if not form or len(form) == 0:
-		raise Exception("Error","No data sent for state update")
-	u_controller.update_state(form)
-	return 200
+
+@app.route('/v1/user/get')
+def get_user():
+	args = request.args
+	user_object = user()
+	if len(args):
+		response = user_object.get(args)
+		return jsonify(response)
+	else:
+		raise Exception("No data sent for get user",400)
 
 @app.route('/v1/user/create',methods=['POST'])
 def create_user():

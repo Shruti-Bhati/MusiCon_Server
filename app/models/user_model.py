@@ -1,7 +1,8 @@
 from app import db
 class user:
 	def __init__(self):
-		self.attributes = ['username','email']
+		self.compl_attributes = ['username','email','first_name','last_name']
+		self.opt_attributes = ['phone']
 		self.database = 'musicon'
 		self.collection = 'user'
 	
@@ -19,8 +20,3 @@ class user:
 		insert_id = db[self.database][self.collection].insert_one(data).inserted_id
 		print 'User inserted id -',insert_id
 		return insert_id
-
-	def update(self,options):
-		_id = options['_id']
-		print "Updating user",_id
-		
