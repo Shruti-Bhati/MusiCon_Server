@@ -4,12 +4,11 @@ from models.user_controller import user
 from models.features import features
 features_collection = features().getall()
 
-@app.route('/v1/user/get')
-def get_user():
-	args = request.args
+@app.route('/v1/user/get/<username>')
+def get_user(username):
 	user_object = user()
-	if len(args):
-		response = user_object.get(args)
+	if len(username):
+		response = user_object.get(username)
 		return jsonify(response)
 	else:
 		raise Exception("No data sent for get user",400)
@@ -32,6 +31,13 @@ def update_user_state():
 	user_object = user()
 	response = user_object.update_state(form)
 	return str(response)
+
+@app.route('/v1/user/fetch_rec/<username>',methods=['POST'])
+def fetch_recommendation(username):
+	state = request.form
+	if not form or len(form) == 0:
+		state = user_object.fetch_previous_state(username)
+	song = 
 
 @app.errorhandler(500)
 def internal_server_error(error):

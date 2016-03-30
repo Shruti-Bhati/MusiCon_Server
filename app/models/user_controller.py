@@ -64,3 +64,6 @@ class user:
 			if options['update_type'] == "PAM":
 				response = self.pam_model.insert(options)
 				return response
+
+	def fetch_previous_state(self,username):
+		pass
