@@ -33,7 +33,7 @@ def update_user_state():
 @app.route('/v1/user/fetch_rec/<username>',methods=['POST'])
 def fetch_recommendation(username):
 	state = request.form
-	if not form or len(form) == 0:
+	if not state or len(state) == 0:
 		state = user_object.fetch_previous_state(username)
 	rec_controller = recommendation()
 

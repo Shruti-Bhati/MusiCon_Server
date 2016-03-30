@@ -14,11 +14,11 @@ class dTree():
 	self.clf = tree.DecisionTreeClassifier()
 	self.sample=[]
 #look upi table for all possible values for features needed for coding 
-	print features.event_feature.values()
-	self.lut_mood=['-','happy','romantic','relaxed','happy','excited','upbeat','happy','confident','calm','sad','frustrated','sleepy']
-	self.lut_location=['-','restaurant','home','gym','work']
-	self.lut_weather=['-','sunny','breezy','cloudy','rainy','windy']
-	self.lut_event=['-','party','driving','running','studying','work','dinner']
+	print features.event_feature.keys()
+	self.lut_mood=features.mood_feature.keys()
+	self.lut_location=features.location_feature.keys()
+	self.lut_weather=features.weather_feature.keys()
+	self.lut_event=features.event_feature.keys()
 
 
 #load traning data from csv file
