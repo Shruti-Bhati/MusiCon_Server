@@ -37,7 +37,10 @@ def fetch_recommendation(username):
 	if not state or len(state) == 0:
 		state = user_object.fetch_previous_state(username)
 	rec_controller = recommendation()
-
+	state = ['happy', 'home', 'sunny', 'party']
+	response = rec_controller.get_rec(state)
+	return str(response)
+	
 @app.errorhandler(500)
 def internal_server_error(error):
 	print "Internal server error ",error
