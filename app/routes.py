@@ -1,8 +1,6 @@
 from app import app
 from flask import request,jsonify
 from models.user_controller import user
-from models.features import features
-features_collection = features().getall()
 
 @app.route('/v1/user/get/<username>')
 def get_user(username):
@@ -37,7 +35,6 @@ def fetch_recommendation(username):
 	state = request.form
 	if not form or len(form) == 0:
 		state = user_object.fetch_previous_state(username)
-	song = 
 
 @app.errorhandler(500)
 def internal_server_error(error):
