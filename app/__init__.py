@@ -4,5 +4,4 @@ app = Flask('MusiCon', template_folder= "./app/templates", static_folder='./app/
 db = MongoClient('localhost',27017)
 from models.features import features
 features_collection = features().getall()
-print features_collection
 import routes

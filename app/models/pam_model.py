@@ -1,4 +1,5 @@
 from app import db,features_collection
+print features_collection
 import time
 class pam:
 	def __init__(self):
