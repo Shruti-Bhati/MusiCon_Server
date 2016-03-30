@@ -1,7 +1,9 @@
 from app import app
 from flask import request,jsonify
 from models.user_controller import user
-
+from models.features import features
+features_collection = features()
+print features
 
 @app.route('/v1/user/get')
 def get_user():
