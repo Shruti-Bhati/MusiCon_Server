@@ -10,8 +10,8 @@ class features:
 		collections_data = {}
 		for collection in self.collections:
 			cursor_object =  db[self.database][collection].find({})
-			docs = list()
+			docs = {}
 			for doc in cursor_object:
-				docs.append(doc)
+				docs[doc['value']] = doc['id']
 			collections_data[collection] = docs
 		return collections_data
