@@ -4,7 +4,6 @@ class features:
 		self.attributes = ['id','value']
 		self.database = 'musicon'
 		self.collections = ['event_feature','location_feature','mood_feature','pam_feature','weather_feature']
-		return self.getall()
 
 	def getall(self):
 		print "fetching all attributes"
