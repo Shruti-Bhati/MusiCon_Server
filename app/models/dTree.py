@@ -7,13 +7,14 @@ import numpy as np
 # descission tree class
 class dTree():
 # intialize 
-    def init(self):
+    def init(self, features):
 	self.features=[]
 	self.labels=[]
 	self.codedFeatures=[]
 	self.clf = tree.DecisionTreeClassifier()
 	self.sample=[]
 #look upi table for all possible values for features needed for coding 
+	print features.event_feature.values()
 	self.lut_mood=['-','happy','romantic','relaxed','happy','excited','upbeat','happy','confident','calm','sad','frustrated','sleepy']
 	self.lut_location=['-','restaurant','home','gym','work']
 	self.lut_weather=['-','sunny','breezy','cloudy','rainy','windy']

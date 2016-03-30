@@ -1,7 +1,6 @@
 from app import app
 from flask import request,jsonify
-from models.user_controller import user
-
+from models.user_controller import user,recommendation
 @app.route('/v1/user/get/<username>')
 def get_user(username):
 	user_object = user()
@@ -35,6 +34,7 @@ def fetch_recommendation(username):
 	state = request.form
 	if not form or len(form) == 0:
 		state = user_object.fetch_previous_state(username)
+	rec_controller = recommendation()
 
 @app.errorhandler(500)
 def internal_server_error(error):

@@ -1,4 +1,4 @@
-from user_model import user as user_model
+from user_model import user_model
 from pam_model import pam as pam_model
 from bson.objectid import ObjectId
 class user:

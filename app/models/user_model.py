@@ -1,5 +1,5 @@
 from app import db
-class user:
+class user_model:
 	def __init__(self):
 		self.compl_attributes = ['username','email','first_name','last_name']
 		self.opt_attributes = ['phone']
