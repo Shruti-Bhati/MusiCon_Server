@@ -1,6 +1,7 @@
 from app import app
 from flask import request,jsonify
-from models.user_controller import user,recommendation
+from models.user_controller import user
+from models.recommendation_controller import recommendation
 @app.route('/v1/user/get/<username>')
 def get_user(username):
 	user_object = user()
