@@ -3,7 +3,7 @@ class features:
 	def __init__(self):
 		self.attributes = ['id','value']
 		self.database = 'musicon'
-		self.collections = ['event_feature','location_feature','mood_feature','pam_feature','weather_feature']
+		self.collections = ['event_feature','location_feature','mood_feature','weather_feature']
 
 	def getall(self):
 		print "fetching all attributes"
