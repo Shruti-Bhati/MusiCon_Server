@@ -2,7 +2,7 @@ song id,mood,location,weather,event
 1,happy,home,sunny,party
 1,romantic,restaurant,sunny,driving
 1,serene,home,breezy,-
-2,Happy,home,sunny,running
+2,happy,home,sunny,running
 2,excited,restaurant,cloudy,- 
 2,excited,gym,breezy,- 
 2,happy,restaurant,sunny,- 
@@ -31,7 +31,7 @@ song id,mood,location,weather,event
 9,serene,restaurant,cloudy,-
 9,happy,home,breezy,-
 9,serene,-,windy,driving
-10,Calm,home,breezy,-
+10,calm,home,breezy,-
 10,serene,home,sunny,-
 10,romantic,restaurant,rainy,dinner
 11,excited,work,sunny,
