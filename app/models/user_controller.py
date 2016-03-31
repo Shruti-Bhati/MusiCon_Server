@@ -50,6 +50,8 @@ class user:
 
 		userdata = self.user_model_object.get(data)
 		beautified_data = {}
+		if isinstance(userdata,list) != True:
+			userdata = [userdata]
 		for key in userdata[0]:
 			if key == '_id':
 				beautified_data['user_id'] = str(userdata[0][key])
