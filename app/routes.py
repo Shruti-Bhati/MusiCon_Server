@@ -45,6 +45,7 @@ def fetch_recommendation(username):
 	songs_controller = songs()
 	rec_ids = rec_controller.get_rec(state)
 	song_uris = songs_controller.get(rec_ids)
+	song_uris = [str(s) for s in song_uris]
 	return str(song_uris)
 
 @app.errorhandler(500)
