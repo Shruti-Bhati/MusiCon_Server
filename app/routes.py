@@ -45,11 +45,11 @@ def fetch_recommendation(username):
 			state.append('-')
 		elif f == 'weather':
 			w = weather()
-			"Fetching weather info for coordinates",latitude,longitude
+			print "Fetching weather info for coordinates",latitude,longitude
 			state.append(w.get_weather(latitude,longitude))
 		elif f == "mood":
 			m = user_state_history()
-			"Fetching latest user mood"
+			print "Fetching latest user mood"
 			state.append(m.get_latest(username,"mood_feature"))
 	print "Fetched state final", state
 	user_object = user()
