@@ -2,6 +2,7 @@ from app import app
 from flask import request,jsonify
 from models.user_controller import user
 from models.recommendation_controller import recommendation
+from models.songs_model import songs
 @app.route('/v1/user/get/<username>')
 def get_user(username):
 	user_object = user()
@@ -41,8 +42,10 @@ def fetch_recommendation(username):
 	if len(state) == 0:
 		state = user_object.fetch_previous_state(username)
 	rec_controller = recommendation()
-	response = rec_controller.get_rec(state)
-	return str(response)
+	songs_controller = songs()
+	rec_ids = rec_controller.get_rec(state)
+	song_uris = songs_controller.get(rec_ids)
+	return str(song_uris)
 
 @app.errorhandler(500)
 def internal_server_error(error):
