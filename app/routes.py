@@ -58,7 +58,11 @@ def fetch_recommendation(username):
 	rec_ids = rec_controller.get_rec(state)
 	song_uris = songs_controller.get(rec_ids)
 	song_uris = [str(s) for s in song_uris]
-	return str(song_uris)
+	song_uris.append("spotify:track:0BF6mdNROWgYo3O3mNGrBc")
+	song_uris.append("spotify:track:4O0Yww5OIWyfBvWn6xN3CM")
+	song_uris.append("spotify:track:3LlAyCYU26dvFZBDUIMb7a")
+	song_uris.append("spotify:track:0YuH7QCFXK0elodziM1cOU")
+	return jsonify(uris=song_uris)
 
 @app.errorhandler(500)
 def internal_server_error(error):
