@@ -32,15 +32,18 @@ def update_user_state():
 
 @app.route('/v1/user/fetch_rec/<username>',methods=['POST'])
 def fetch_recommendation(username):
-	state = request.form
+	form = request.form
+	features = ['mood','location','weather','event']
+	state = []
+	for f in features:
+		state.append(form[f])
 	user_object = user()
-	if not state or len(state) == 0:
+	if len(state) == 0:
 		state = user_object.fetch_previous_state(username)
 	rec_controller = recommendation()
-	state = ['happy', 'home', 'sunny', 'party']
 	response = rec_controller.get_rec(state)
 	return str(response)
-	
+
 @app.errorhandler(500)
 def internal_server_error(error):
 	print "Internal server error ",error
