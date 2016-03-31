@@ -1,18 +1,25 @@
-from app import db
+from app import db,features_collection
 import time
 class pam:
 	def __init__(self):
-		self.attributes = ['user_id','timestamp','mood_id']
+		self.attributes = ['username','timestamp','feature_id','feature']
 		self.database = 'musicon'
-		self.collection = 'pam'
+		self.collection = 'user_state_history'
 	
-	def get(self,options):
-		print "Fetching pam data for user",options.user_id
-		cursor_object =  db[self.database][self.collection].find({"user_id":options.user_id})
+	def get(self,username):
+		print "Fetching pam data for user",username
+		cursor_object =  db[self.database][self.collection].find({"username":username})
 		docs = list()
 		for doc in cursor_object:
 			docs.append(doc)
 		return docs
+
+	def get_latest(self,username,feature):
+		sort = {'timestamp':-1}
+		cursor_object = db[self.database][self.collection].find({"username":username,"feature":feature},limit:1)
+		for key in features_collection[feature]:
+			if features_collection[feature][key] == cursor_object[0]:
+				return key
 
 	def insert(self,options):
 		print "Updating pam state for user ",options['user_id']
