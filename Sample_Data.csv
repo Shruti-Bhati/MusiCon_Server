@@ -3,9 +3,9 @@ song id,mood,location,weather,event
 1,romantic,restaurant,sunny,driving
 1,serene,home,breezy,-
 2,happy,home,sunny,running
-2,excited,restaurant,cloudy,- 
-2,excited,gym,breezy,- 
-2,happy,restaurant,sunny,- 
+2,excited,restaurant,cloudy,-
+2,excited,gym,breezy,-
+2,happy,restaurant,sunny,-
 2,excited,restaurant,-,running
 3,excited,-,sunny,driving
 3,confident,home,breezy,partying
@@ -34,9 +34,9 @@ song id,mood,location,weather,event
 10,calm,home,breezy,-
 10,serene,home,sunny,-
 10,romantic,restaurant,rainy,dinner
-11,excited,work,sunny,
+11,excited,work,sunny,-
 11,excited,-,cloudy,driving
-11,frustrated,home,breezy,
+11,frustrated,home,breezy,-
 12,calm,home,breezy,dinner
 12,sad,work,cloudy,-
 13,sleepy,home,cloudy,-
