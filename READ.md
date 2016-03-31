@@ -14,10 +14,11 @@ APIs
 
 2.  User fetch
   
-  endpoint - http://52.37.58.111/v1/user/get
+  endpoint - http://52.37.58.111/v1/user/get/ < username >
+
   HTTP GET,
   Sample APIs
-  http://52.37.58.111/v1/user/get?username=sbhati3
+  http://52.37.58.111/v1/user/get/sbhati3
 
 
   
