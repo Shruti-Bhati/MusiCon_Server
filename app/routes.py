@@ -4,7 +4,7 @@ from models.user_controller import user
 from models.recommendation_controller import recommendation
 from models.songs_model import songs
 from models.weather_controller import weather 
-from models.pam_model import pam
+from models.user_state_history_model import user_state_history
 @app.route('/v1/user/get/<username>')
 def get_user(username):
 	user_object = user()
@@ -47,8 +47,8 @@ def fetch_recommendation(username):
 			w = weather()
 			state.append(w.get_weather(latitude,longitude))
 		elif f == "mood":
-			m = pam()
-			state.append(m.get_latest(username,"PAM"))
+			m = user_state_history()
+			state.append(m.get_latest(username,"mood_feature"))
 	print state
 	user_object = user()
 	if len(state) == 0:
