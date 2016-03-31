@@ -3,6 +3,7 @@ from flask import request,jsonify
 from models.user_controller import user
 from models.recommendation_controller import recommendation
 from models.songs_model import songs
+from models.weather_controller import weather 
 @app.route('/v1/user/get/<username>')
 def get_user(username):
 	user_object = user()
@@ -36,8 +37,16 @@ def fetch_recommendation(username):
 	form = request.form
 	features = ['mood','location','weather','event']
 	state = []
+	latitude = form['lat']
+	longitude = form['lon']
 	for f in features:
-		state.append(form[f])
+		if f == 'location' or f == 'event':
+			state.append('-')
+		elif f == 'weather':
+			w = weather()
+			state.append(w.get_weather(latitude,longitude))
+		else:
+			state.append(form[f])
 	user_object = user()
 	if len(state) == 0:
 		state = user_object.fetch_previous_state(username)
