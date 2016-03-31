@@ -7,8 +7,8 @@ from models.weather_controller import weather
 @app.route('/v1/user/get/<username>')
 def get_user(username):
 	user_object = user()
-	if len(username):
-		response = user_object.get(username)
+	if username:
+		response = user_object.get({"username":username})
 		return jsonify(response)
 	else:
 		raise Exception("No data sent for get user",400)
@@ -47,6 +47,7 @@ def fetch_recommendation(username):
 			state.append(w.get_weather(latitude,longitude))
 		else:
 			state.append(form[f])
+	print state
 	user_object = user()
 	if len(state) == 0:
 		state = user_object.fetch_previous_state(username)

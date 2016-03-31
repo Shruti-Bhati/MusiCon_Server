@@ -8,10 +8,13 @@ class weather:
 		weather_feature = None
 		req = requests.get(self.url+'?lat='+str(lat)+"&lon="+str(lon)+"&appid="+self.api_key)
 		weather_id =  int(req.json()['weather'][0]['id'])
+		print weather_id
 		if 200 <= weather_id <= 540:
 			weather_feature = 'rainy'
 		elif 600 <= weather_id <= 622:
 			weather_feature = 'snowy'
+		elif weather_id == 701 or weather_id == 711 or weather_id == 721 or weather_id == 741:
+			weather_feature = 'cloudy'
 		elif weather_id == 800:
 			weather_feature = 'sunny'
 		elif 801 <= weather_id <= 804:
