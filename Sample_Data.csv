@@ -1,5 +1,5 @@
 song id,mood,location,weather,event
-1,happy,home,sunny,party
+1,happy,home,sunny,partying
 1,romantic,restaurant,sunny,driving
 1,serene,home,breezy,-
 2,happy,home,sunny,running
@@ -8,12 +8,12 @@ song id,mood,location,weather,event
 2,happy,restaurant,sunny,- 
 2,excited,restaurant,-,running
 3,excited,-,sunny,driving
-3,confident,home,breezy,party
+3,confident,home,breezy,partying
 3,excited,gym,sunny,running
 4,excited,gym,rainy,running
 4,excited,gym,breezy,running
-4,excited,-,sunny,party
-4,excited,home,sunny,party
+4,excited,-,sunny,partying
+4,excited,home,sunny,partying
 5,excited,gym,sunny,running
 5,excited,gym,breezy,-
 5,confident,gym,breezy,running
@@ -25,7 +25,7 @@ song id,mood,location,weather,event
 7,sad,home,breezy,studying
 7,serene,work,sunny,work
 8,serene,home,sunny,studying
-8,romantic,home,cloudy,party
+8,romantic,home,cloudy,partying
 8,calm,-,breezy,driving
 9,calm,home,sunny,dinner
 9,serene,restaurant,cloudy,-
