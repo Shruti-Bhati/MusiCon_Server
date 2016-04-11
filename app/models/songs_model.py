@@ -11,5 +11,5 @@ class songs:
 		cursor_object  = db[self.database][self.collection].find({"song_id":{"$in":ids}})
 		song_data = list()
 		for doc in cursor_object:
-			song_data.append({artist:doc['artist'],track:doc['song']})
-		return uris
+			song_data.append({"artist":doc['artist'],"track":doc['song']})
+		return song_data

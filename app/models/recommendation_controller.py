@@ -1,6 +1,6 @@
 from app import features_collection
 from dTree import dTree
-import requests
+import requests,json
 class recommendation:
 	def __init__(self):
 		self.ml_model = dTree()
@@ -13,7 +13,8 @@ class recommendation:
 		return self.ml_model.test(state)
 
 	def get_similar_tracks(self,song_data,num):
-		track = song_data['track']
-		artist = song_data['artist']
+		track = song_data[0]['track']
+		artist = song_data[0]['artist']
 		response = requests.get("http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&artist="+artist+"&track="+track+"&api_key="+self.lastfm_api_key+"&format=json")
-		print response
+		json_response = response.json()
+		print json_response
