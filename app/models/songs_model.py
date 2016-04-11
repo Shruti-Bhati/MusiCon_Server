@@ -9,7 +9,7 @@ class songs:
 		print "fetching song URIs for stored song ids"
 		ids = [int(i) for i in ids]
 		cursor_object  = db[self.database][self.collection].find({"song_id":{"$in":ids}})
-		uris = list()
+		song_data = list()
 		for doc in cursor_object:
-			uris.append(doc['uri'])
+			song_data.append({artist:doc['artist'],track:doc['song']})
 		return uris
