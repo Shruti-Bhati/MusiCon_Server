@@ -49,7 +49,10 @@ def fetch_recommendation(username):
 		elif f == 'weather':
 			w = weather()
 			print "Fetching weather info for coordinates",latitude,longitude
-			state.append(w.get_weather(latitude,longitude))
+			if "gym" in state[1]:
+				state.append('-')
+			else:
+				state.append(w.get_weather(latitude,longitude))
 		elif f == "mood":
 			m = user_state_history()
 			print "Fetching latest user mood"
@@ -58,7 +61,7 @@ def fetch_recommendation(username):
 			if "bmp" in form:
 				bmp = form["bmp"]
 				state.append(bmp_ranges(bmp))
-				state[1] = '-'
+				state[0] = '-'
 			else:
 				state.append("-")
 	print "Fetched state final", state
