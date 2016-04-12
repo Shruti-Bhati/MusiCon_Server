@@ -1,10 +1,10 @@
 from user_model import user_model
-from pam_model import pam as pam_model
+from user_state_history_model import user_state_history as user_state_history_model
 from bson.objectid import ObjectId
 class user:
 	def __init__(self):
 		self.user_model_object = user_model()
-		self.pam_model = pam_model()
+		self.user_state_history_model = user_state_history_model()
 		self.attributes = self.user_model_object.compl_attributes + self.user_model_object.opt_attributes
 
 	def create(self,options):
@@ -60,12 +60,11 @@ class user:
 		return beautified_data
 
 	def update_state(self,options):
-		if 'user_id' not in options or 'update_type' not in options:
-			raise Exception("No id/update_type given for user",400)
+		if 'username' not in options or 'feature' not in options:
+			raise Exception("No username/feature given for user",400)
 		else:
-			if options['update_type'] == "PAM":
-				response = self.pam_model.insert(options)
-				return response
+			response = self.user_state_history_model.insert(options)
+			return response
 
 	def fetch_previous_state(self,username):
 		pass
