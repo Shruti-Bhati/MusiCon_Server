@@ -63,6 +63,7 @@ def fetch_recommendation(username):
 	song_data = songs_controller.get(rec_ids)
 	all_song_data = rec_controller.get_similar_tracks(song_data,5)
 	song_uris = spotify_controller.get_uris(all_song_data)
+	
 	return jsonify(uris=song_uris)
 
 @app.errorhandler(500)

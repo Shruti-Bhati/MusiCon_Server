@@ -29,10 +29,19 @@ class recommendation:
 			if len(artists):
 				if len(artists) < num:
 					num = len(artists)
+				artist_names = []
 				for i in range(num):
-					sim_artist = urllib.quote_plus(artists[i]['name'])
-					top_tracks_response = requests.get("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist="+sim_artist+"&api_key="+self.lastfm_api_key+"&format=json")
-					top_tracks_response = top_tracks_response.json()
-					tracks = top_tracks_response['toptracks']['track'][0]
-					similar.append({"track":tracks['name'],"artist":tracks['artist']['name']})					
+					sim_artist = artists[i]['name']
+					artist_names.append(sim_artist)
+				similar = self.get_artist_song(artist_names)
 		return similar
+
+	def get_artist_song(self,artists):
+		artist_song_data = []
+		for a in artists:
+			a = urllib.quote_plus(a)
+			top_tracks_response = requests.get("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist="+a+"&api_key="+self.lastfm_api_key+"&format=json")
+			top_tracks_response = top_tracks_response.json()
+			tracks = top_tracks_response['toptracks']['track'][0]
+			artist_song_data.append({"artist":tracks['artist']['name'],"track":tracks['name']})
+		return artist_song_data
