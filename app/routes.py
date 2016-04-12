@@ -53,14 +53,12 @@ def fetch_recommendation(username):
 		elif f == "mood":
 			m = user_state_history()
 			print "Fetching latest user mood"
-			if "gym" in state[1]:
-				state.append('-')
-			else:
-				state.append(m.get_latest(username,"mood_feature"))
+			state.append(m.get_latest(username,"mood_feature"))
 		elif f == "location":
 			if "bmp" in form:
 				bmp = form["bmp"]
 				state.append(bmp_ranges(bmp))
+				state[1] = '-'
 			else:
 				state.append("-")
 	print "Fetched state final", state
