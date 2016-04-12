@@ -27,6 +27,6 @@ APIs
   endpoint - http://52.37.58.111/v1/user/update_state
   HTTP POST,data needs to be sent as form-data
   sample fields and data =>
-  user_id:56dce1ad8541556a60112400
-  mood_id:5
-  update_type:PAM
+  username:bverma
+  feature_id:5
+  feature:"mood_feature"
