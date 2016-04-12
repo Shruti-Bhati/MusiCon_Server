@@ -5,6 +5,7 @@ from models.recommendation_controller import recommendation
 from models.songs_model import songs
 from models.weather_controller import weather 
 from models.user_state_history_model import user_state_history
+
 @app.route('/v1/user/get/<username>')
 def get_user(username):
 	user_object = user()
@@ -60,7 +61,7 @@ def fetch_recommendation(username):
 	rec_ids = rec_controller.get_rec(state)
 	song_data = songs_controller.get(rec_ids)
 	all_song_data = rec_controller.get_similar_tracks(song_data,5)
-	
+
 	return jsonify(uris=song_uris)
 
 @app.errorhandler(500)
