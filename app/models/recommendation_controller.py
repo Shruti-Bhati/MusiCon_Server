@@ -16,6 +16,7 @@ class recommendation:
 		similar = []
 		track = urllib.quote_plus(song_data[0]['track'])
 		artist = urllib.quote_plus(song_data[0]['artist'])
+		similar.append({"track":track,"artist":artist})
 		response = requests.get("http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&artist="+artist+"&track="+track+"&api_key="+self.lastfm_api_key+"&format=json")
 		response = response.json()
 		tracks = response['similartracks']['track']
@@ -23,7 +24,8 @@ class recommendation:
 			print "found similar tracks"
 			filtered_tracks = tracks[:num]
 			filtered_tracks = [{"track":a['name'],"artist":a['artist']['name']} for a in filtered_tracks]
-			similar = filtered_tracks
+			for f in filtered_tracks:
+				similar.append(f)
 		else:
 			print "No similar tracks found,getting similar artists"
 			artist_response = requests.get("http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist="+artist+"&api_key="+self.lastfm_api_key+"&format=json")
@@ -37,7 +39,9 @@ class recommendation:
 					sim_artist = artists[i]['name']
 					artist_names.append(sim_artist)
 				print "Similar artists",artist_names
-				similar = self.get_artist_song(artist_names)
+				more_similar = self.get_artist_song(artist_names)
+				for s in more_similar:
+					similar.append(s)
 		return similar
 
 	def get_artist_song(self,artists):
