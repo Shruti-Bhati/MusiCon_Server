@@ -16,7 +16,7 @@ class user_state_history:
 
 	def get_latest(self,username,feature):
 		sort = {'timestamp':-1}
-		cursor_object = db[self.database][self.collection].find({"username":username,"feature":feature}).sort([("timestamp",-1)].limit(1)
+		cursor_object = db[self.database][self.collection].find({"username":username,"feature":feature}).sort([("timestamp",-1)]).limit(1)
 		feature_id = 0
 		for doc in cursor_object:
 			feature_id = doc['feature_id']
