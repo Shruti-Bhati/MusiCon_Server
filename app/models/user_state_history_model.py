@@ -31,6 +31,8 @@ class user_state_history:
 
 	def insert(self,options):
 		print "Updating pam state for user ",options['username']
+		if "feature_id" in options:
+			options["feature_id"] = int(options["feature_id"]) + 1
 		data = {key:options[key] for key in options}
 		data['timestamp'] = time.time()
 		insert_id = db[self.database][self.collection].insert_one(data).inserted_id
