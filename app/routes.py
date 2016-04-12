@@ -45,7 +45,7 @@ def fetch_recommendation(username):
 	longitude = form['lon']
 	for f in features:
 		if f == 'event':
-			state.append('running')
+			state.append('-')
 		elif f == 'weather':
 			w = weather()
 			print "Fetching weather info for coordinates",latitude,longitude
@@ -53,7 +53,10 @@ def fetch_recommendation(username):
 		elif f == "mood":
 			m = user_state_history()
 			print "Fetching latest user mood"
-			state.append(m.get_latest(username,"mood_feature"))
+			if "gym" in state[1]:
+				state.append('-')
+			else:
+				state.append(m.get_latest(username,"mood_feature"))
 		elif f == "location":
 			if "bmp" in form:
 				bmp = form["bmp"]
