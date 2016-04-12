@@ -6,7 +6,7 @@ from models.songs_model import songs
 from models.weather_controller import weather 
 from models.user_state_history_model import user_state_history
 from models.spotify_controller import spotify
-from utils import bmp_ranges
+from utils import get_bmp_songs
 @app.route('/v1/user/get/<username>')
 def get_user(username):
 	user_object = user()
@@ -44,40 +44,34 @@ def fetch_recommendation(username):
 	latitude = form['lat']
 	longitude = form['lon']
 	for f in features:
-		if f == 'event':
+		if f == 'event' or f == 'location':
 			state.append('-')
 		elif f == 'weather':
 			w = weather()
 			print "Fetching weather info for coordinates",latitude,longitude
-			if "gym" in state[1]:
-				state.append('-')
-			else:
-				state.append(w.get_weather(latitude,longitude))
+			state.append(w.get_weather(latitude,longitude))
 		elif f == "mood":
 			m = user_state_history()
 			print "Fetching latest user mood"
 			state.append(m.get_latest(username,"mood_feature"))
-		elif f == "location":
-			if "bmp" in form:
-				bmp = form["bmp"]
-				state.append(bmp_ranges(bmp))
-				state[0] = '-'
-			else:
-				state.append("-")
 	print "Fetched state final", state
 	user_object = user()
-	if len(state) == 0:
-		state = user_object.fetch_previous_state(username)
-	rec_controller = recommendation()
-	songs_controller = songs()
-	spotify_controller = spotify()
-	rec_ids = rec_controller.get_rec(state)
-	song_data = songs_controller.get(rec_ids)
-	all_song_data = rec_controller.get_similar_tracks(song_data,min_songs)
-	print "Similar song artist,songs",all_song_data
-	song_uris = spotify_controller.get_uris(all_song_data)
+	if "bmp" in form:
+		songs =	get_bmp_songs(form['bmp'])
+		return jsonify(uris=songs)
+	else:
+		if len(state) == 0:
+			state = user_object.fetch_previous_state(username)
+		rec_controller = recommendation()
+		songs_controller = songs()
+		spotify_controller = spotify()
+		rec_ids = rec_controller.get_rec(state)
+		song_data = songs_controller.get(rec_ids)
+		all_song_data = rec_controller.get_similar_tracks(song_data,min_songs)
+		print "Similar song artist,songs",all_song_data
+		song_uris = spotify_controller.get_uris(all_song_data)
 
-	return jsonify(uris=song_uris)
+		return jsonify(uris=song_uris)
 
 @app.errorhandler(500)
 def internal_server_error(error):
