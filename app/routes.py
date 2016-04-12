@@ -6,6 +6,7 @@ from models.songs_model import songs
 from models.weather_controller import weather 
 from models.user_state_history_model import user_state_history
 from models.spotify_controller import spotify
+import utils
 @app.route('/v1/user/get/<username>')
 def get_user(username):
 	user_object = user()
@@ -36,13 +37,14 @@ def update_user_state():
 
 @app.route('/v1/user/fetch_rec/<username>',methods=['POST'])
 def fetch_recommendation(username):
+	min_songs = 5
 	form = request.form
 	features = ['mood','location','weather','event']
 	state = []
 	latitude = form['lat']
 	longitude = form['lon']
 	for f in features:
-		if f == 'location' or f == 'event':
+		if f == 'event':
 			state.append('-')
 		elif f == 'weather':
 			w = weather()
@@ -52,6 +54,10 @@ def fetch_recommendation(username):
 			m = user_state_history()
 			print "Fetching latest user mood"
 			state.append(m.get_latest(username,"mood_feature"))
+		elif f == "location":
+			if "bmp" in form:
+				bmp = form["bmp"]
+				state.append(utils.bmp_ranges(bmp))
 	print "Fetched state final", state
 	user_object = user()
 	if len(state) == 0:
@@ -61,9 +67,10 @@ def fetch_recommendation(username):
 	spotify_controller = spotify()
 	rec_ids = rec_controller.get_rec(state)
 	song_data = songs_controller.get(rec_ids)
-	all_song_data = rec_controller.get_similar_tracks(song_data,5)
+	all_song_data = rec_controller.get_similar_tracks(song_data,min_songs)
 	song_uris = spotify_controller.get_uris(all_song_data)
-	
+	if len(song_uris) < min_songs:
+
 	return jsonify(uris=song_uris)
 
 @app.errorhandler(500)
