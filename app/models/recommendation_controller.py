@@ -1,6 +1,6 @@
 from app import features_collection
 from dTree import dTree
-import requests,json
+import requests,json,urllib
 class recommendation:
 	def __init__(self):
 		self.ml_model = dTree()
@@ -13,8 +13,27 @@ class recommendation:
 		return self.ml_model.test(state)
 
 	def get_similar_tracks(self,song_data,num):
-		track = song_data[0]['track']
-		artist = song_data[0]['artist']
+		similar = []
+		track = urllib.urlencode(song_data[0]['track'])
+		artist = urllib.urlencode(song_data[0]['artist'])
 		response = requests.get("http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&artist="+artist+"&track="+track+"&api_key="+self.lastfm_api_key+"&format=json")
-		json_response = response.json()
-		print json_response
+		response = response.json()
+		tracks = response['similartracks']['track']
+		if len(tracks):
+			filtered_tracks = tracks[:num]
+			filtered_tracks = [{"track":a['name'],"artist":a['artist']['name'] for a in filtered_tracks}			
+		else:
+			artist_response = requests.get("http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist="+artist+"&api_key="+self.lastfm_api_key+"&format=json")
+			artist_response = artist_response.json()
+			artists = artist_response['similarartists']['artist']
+			if len(artists):
+				if len(artists) < num:
+					num = len(artists)
+				for i in range(num):
+					sim_artist = urllib.urlencode(artists[i]['name'])
+					top_tracks_response = requests.get("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist="+sim_artist+"&api_key="+self.lastfm_api_key+"&format=json")
+					top_tracks_response = top_tracks_response.json()
+					tracks = top_tracks_response['toptracks']['track'][0]
+					similar.append({"track":tracks['name'],"artist":tracks['artist']['name']})					
+		print similar
+		return similar
