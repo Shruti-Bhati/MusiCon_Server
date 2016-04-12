@@ -23,6 +23,7 @@ class recommendation:
 			print "found similar tracks"
 			filtered_tracks = tracks[:num]
 			filtered_tracks = [{"track":a['name'],"artist":a['artist']['name']} for a in filtered_tracks]
+			similar = filtered_tracks
 		else:
 			print "No similar tracks found,getting similar artists"
 			artist_response = requests.get("http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist="+artist+"&api_key="+self.lastfm_api_key+"&format=json")
