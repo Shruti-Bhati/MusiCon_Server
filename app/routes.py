@@ -57,8 +57,8 @@ def fetch_recommendation(username):
 	print "Fetched state final", state
 	user_object = user()
 	if "bmp" in form:
-		songs =	get_bmp_songs(form['bmp'])
-		return jsonify(uris=songs)
+		song_uris = get_bmp_songs(form['bmp'])
+		return jsonify(uris=song_uris)
 	else:
 		if len(state) == 0:
 			state = user_object.fetch_previous_state(username)
