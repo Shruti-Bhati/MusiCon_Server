@@ -10,7 +10,8 @@ class spotify:
 			artist = urllib.quote_plus(song_obj['artist'])
 			response = requests.get(self.endpoint + "?q=" + track + ":" + artist + "&type=track,artist&limit=1")
 			response = response.json()
-			track_uri = response['tracks']['items'][0]['uri']
-			uris.append(track_uri)
+			if len(response['tracks']['items']):
+				track_uri = response['tracks']['items'][0]['uri']
+				uris.append(track_uri)
 		print uris
 		return uris
