@@ -6,7 +6,7 @@ class songs:
 		self.collection = 'songs'
 
 	def get(self,ids):
-		print "fetching song URIs for stored song ids"
+		print "fetching song URIs for stored song ids",ids
 		ids = [int(i) for i in ids]
 		cursor_object  = db[self.database][self.collection].find({"song_id":{"$in":ids}})
 		song_data = list()

@@ -1,4 +1,5 @@
 def bmp_ranges(bmp):
+	bmp = int(bmp)
 	if 59 < bmp <= 75:
 		return "gym1"
 	elif 75 < bmp <= 95:

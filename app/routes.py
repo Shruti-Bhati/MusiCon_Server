@@ -6,7 +6,7 @@ from models.songs_model import songs
 from models.weather_controller import weather 
 from models.user_state_history_model import user_state_history
 from models.spotify_controller import spotify
-import utils
+from utils import bmp_ranges
 @app.route('/v1/user/get/<username>')
 def get_user(username):
 	user_object = user()
@@ -45,7 +45,7 @@ def fetch_recommendation(username):
 	longitude = form['lon']
 	for f in features:
 		if f == 'event':
-			state.append('-')
+			state.append('running')
 		elif f == 'weather':
 			w = weather()
 			print "Fetching weather info for coordinates",latitude,longitude
@@ -57,7 +57,9 @@ def fetch_recommendation(username):
 		elif f == "location":
 			if "bmp" in form:
 				bmp = form["bmp"]
-				state.append(utils.bmp_ranges(bmp))
+				state.append(bmp_ranges(bmp))
+			else:
+				state.append("-")
 	print "Fetched state final", state
 	user_object = user()
 	if len(state) == 0:
@@ -68,8 +70,8 @@ def fetch_recommendation(username):
 	rec_ids = rec_controller.get_rec(state)
 	song_data = songs_controller.get(rec_ids)
 	all_song_data = rec_controller.get_similar_tracks(song_data,min_songs)
+	print "Similar song artist,songs",all_song_data
 	song_uris = spotify_controller.get_uris(all_song_data)
-	if len(song_uris) < min_songs:
 
 	return jsonify(uris=song_uris)
 

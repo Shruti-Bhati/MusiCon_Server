@@ -6,9 +6,10 @@ class spotify:
 	def get_uris(self,songs):
 		uris = []
 		for song_obj in songs:
-			track = urllib.quote_plus(song_obj['track'])
-			artist = urllib.quote_plus(song_obj['artist'])
-			response = requests.get(self.endpoint + "?q=" + track + ":" + artist + "&type=track,artist&limit=1")
+			track = urllib.quote_plus(song_obj['track'].lower())
+			artist = urllib.quote_plus(song_obj['artist'].lower())
+			url = self.endpoint + "?q=" + track + ":" + artist + "&type=track,artist&limit=1"
+			response = requests.get(url)
 			response = response.json()
 			if len(response['tracks']['items']):
 				track_uri = response['tracks']['items'][0]['uri']

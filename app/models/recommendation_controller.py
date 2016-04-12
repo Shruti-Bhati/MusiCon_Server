@@ -20,9 +20,11 @@ class recommendation:
 		response = response.json()
 		tracks = response['similartracks']['track']
 		if len(tracks):
+			print "found similar tracks"
 			filtered_tracks = tracks[:num]
 			filtered_tracks = [{"track":a['name'],"artist":a['artist']['name']} for a in filtered_tracks]
 		else:
+			print "No similar tracks found,getting similar artists"
 			artist_response = requests.get("http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist="+artist+"&api_key="+self.lastfm_api_key+"&format=json")
 			artist_response = artist_response.json()
 			artists = artist_response['similarartists']['artist']
@@ -33,6 +35,7 @@ class recommendation:
 				for i in range(num):
 					sim_artist = artists[i]['name']
 					artist_names.append(sim_artist)
+				print "Similar artists",artist_names
 				similar = self.get_artist_song(artist_names)
 		return similar
 
@@ -43,5 +46,5 @@ class recommendation:
 			top_tracks_response = requests.get("http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist="+a+"&api_key="+self.lastfm_api_key+"&format=json")
 			top_tracks_response = top_tracks_response.json()
 			tracks = top_tracks_response['toptracks']['track'][0]
-			artist_song_data.append({"artist":tracks['artist']['name'],"track":tracks['name']})
+			artist_song_data.append({"artist":tracks['artist']['name'],"track":tracks['name']})	
 		return artist_song_data
