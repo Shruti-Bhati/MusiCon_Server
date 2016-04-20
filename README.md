@@ -30,3 +30,15 @@ APIs
   username:bverma
   feature_id:5
   feature:"mood_feature"
+
+
+4.  Fetch Recommendation API
+
+  endpoint - http://52.37.58.111/v1/user/fetch_rec/username where username can be anything say bverma
+  HTTP POST, data needs to be sent as form-data
+  Compulsory Arguments - 
+  lat - latitude 
+  lon - longitude
+  
+  Additional Arguments(activity recognition) - 
+  bmp - integer that has the BMP of the user. If not available, donot send this field
