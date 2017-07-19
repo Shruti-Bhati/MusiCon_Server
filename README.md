@@ -6,7 +6,7 @@ APIs
 1. User Create API
 
   HTTP POST,data needs to be sent as form-data
-  endpoint - http://52.37.58.111/v1/user/create
+  endpoint - http://localhost:port/v1/user/create
   compulsory fields = username,email,first_name,last_name
   optional = phone
 
@@ -14,17 +14,17 @@ APIs
 
 2.  User fetch
   
-  endpoint - http://52.37.58.111/v1/user/get/ < username >
+  endpoint - http://localhost:port/v1/user/get/ < username >
 
   HTTP GET,
   Sample APIs
-  http://52.37.58.111/v1/user/get/sbhati3
+  http://localhost:port/v1/user/get/sbhati3
 
 
   
 3.  User State update(Currently only has PAM updates)
   
-  endpoint - http://52.37.58.111/v1/user/update_state
+  endpoint - http://localhost:port/v1/user/update_state
   HTTP POST,data needs to be sent as form-data
   sample fields and data =>
   username:bverma
@@ -34,7 +34,7 @@ APIs
 
 4.  Fetch Recommendation API
 
-  endpoint - http://52.37.58.111/v1/user/fetch_rec/username where username can be anything say bverma
+  endpoint - http://localhost:port/v1/user/fetch_rec/username where username can be anything say bverma
   HTTP POST, data needs to be sent as form-data
   Compulsory Arguments - 
   lat - latitude 
